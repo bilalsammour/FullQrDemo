@@ -19,15 +19,15 @@ namespace QrDemoWindows
 
         void Go_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog open = new OpenFileDialog
+            OpenFileDialog fileDialog = new OpenFileDialog
             {
                 Filter = "PNG|*.png",
                 Title = "QR"
             };
 
-            open.ShowDialog();
+            fileDialog.ShowDialog();
 
-            string fileName = open.FileName;
+            string fileName = fileDialog.FileName;
 
             if (string.IsNullOrEmpty(fileName))
                 return;

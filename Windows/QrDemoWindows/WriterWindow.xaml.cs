@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
@@ -19,6 +21,19 @@ namespace QrDemoWindows
 
         void Go_Click(object sender, RoutedEventArgs e)
         {
+            var fileDialog = new SaveFileDialog
+            {
+                Filter = "PNG|*.png",
+                Title = "QR"
+            };
+
+            fileDialog.ShowDialog();
+
+            string fileName = fileDialog.FileName;
+
+            if (string.IsNullOrEmpty(fileName))
+                return;
+
             var barcodeWriter = new BarcodeWriter
             {
                 Format = BarcodeFormat.QR_CODE,
@@ -37,8 +52,23 @@ namespace QrDemoWindows
                 {
                     var source = Imaging.CreateBitmapSourceFromHBitmap(hbmp, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                     QrCodeImage.Source = source;
+
+                    WriteBitmap(fileName, source);
                 }
                 catch (Exception ex) { }
+            }
+        }
+
+        void WriteBitmap(string fileName, BitmapSource bmp)
+        {
+
+            var encoder = new PngBitmapEncoder();
+            var outputFrame = BitmapFrame.Create(bmp);
+            encoder.Frames.Add(outputFrame);
+
+            using (var file = File.OpenWrite(fileName))
+            {
+                encoder.Save(file);
             }
         }
     }
