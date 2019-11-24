@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace QrDemo
 {
@@ -8,6 +7,16 @@ namespace QrDemo
         public QrCodePage()
         {
             InitializeComponent();
+
+            Go.Clicked += Go_Clicked;
+        }
+
+        void Go_Clicked(object sender, System.EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textCode.Text))
+                return;
+
+            Qr.BarcodeValue = textCode.Text;
         }
     }
 }

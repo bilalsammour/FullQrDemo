@@ -5,7 +5,9 @@
 
         <Entry x:Name="textCode" Text="Sample" Placeholder="Yore text is here" HorizontalOptions="FillAndExpand" />
 
-        <zxing:ZXingBarcodeImageView BarcodeFormat="QR_CODE" BarcodeValue="{Binding Source={x:Reference textCode}, Path=Text}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        <zxing:ZXingBarcodeImageView x:Name="Qr" BarcodeFormat="QR_CODE" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+        <Button x:Name="Go" Text="Go" />
     </StackLayout>
 
 </ContentPage>
