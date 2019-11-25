@@ -8,10 +8,10 @@ namespace QrDemo
         {
             InitializeComponent();
 
-            Go.Clicked += Go_Clicked;
+            Generate.Clicked += Generate_Clicked;
         }
 
-        void Go_Clicked(object sender, System.EventArgs e)
+        void Generate_Clicked(object sender, System.EventArgs e)
         {
             if (string.IsNullOrEmpty(textCode.Text))
                 return;
