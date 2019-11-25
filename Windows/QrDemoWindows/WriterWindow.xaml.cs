@@ -21,6 +21,9 @@ namespace QrDemoWindows
 
         void Go_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(CodeText.Text))
+                return;
+
             var fileDialog = new SaveFileDialog
             {
                 Filter = "PNG|*.png",
@@ -61,7 +64,6 @@ namespace QrDemoWindows
 
         void WriteBitmap(string fileName, BitmapSource bmp)
         {
-
             var encoder = new PngBitmapEncoder();
             var outputFrame = BitmapFrame.Create(bmp);
             encoder.Frames.Add(outputFrame);
